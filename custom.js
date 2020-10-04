@@ -35,8 +35,8 @@ $(document).ready(function () {
       $ulrInputField.removeClass("is-invalid");
       $submitButton.prop("disabled", true);
     },
-    onSuccess: function (data) {
-      let urls = data.data.attributes.urls;
+    onSuccess: function (event) {
+      let urls = event.data.attributes.urls;
       if (urls.length > 0) {
         let htmlData = _.map(urls, function (url) {
           return template({ url: url });
@@ -46,7 +46,8 @@ $(document).ready(function () {
         alert("There are no images on the specified resource, try another...");
       }
     },
-    onError: function () {
+    onError: function (event) {
+      console.log(event.data.errors.detail);
       $ulrInputField.addClass("is-invalid");
     },
     onComplete: function () {
